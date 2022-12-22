@@ -1,0 +1,12 @@
+name: "Entity Form Steps"
+type: module
+description: "Create and manage multistep entity forms."
+package: Fields
+core_version_requirement: "^9 || ^10"
+dependencies:
+  - field_group:field_group
+
+# Information added by Drupal.org packaging script on 2022-12-19
+version: '1.0.13'
+project: 'entity_form_steps'
+datestamp: 1671487289

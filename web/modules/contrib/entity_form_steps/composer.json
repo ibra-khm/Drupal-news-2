@@ -1,0 +1,17 @@
+{
+    "name": "drupal/entity_form_steps",
+    "description": "Create and manage multistep entity forms using form display.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Robert Phillips",
+            "email": "rob@imagexmedia.com"
+        }
+    ],
+    "require": {
+        "drupal/core": "^9 || ^10",
+        "drupal/field_group": "^3.0",
+        "php": ">=7.4"
+    }
+}

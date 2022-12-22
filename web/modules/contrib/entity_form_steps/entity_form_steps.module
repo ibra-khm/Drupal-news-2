@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Create and manage multistep entity forms using form display.
+ */
+
+use Drupal\Core\Entity\ContentEntityFormInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\entity_form_steps\Form\EntityFormSteps;
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function entity_form_steps_module_implements_alter(&$implementations, $hook): void {
+  if ($hook === 'form_alter') {
+    // Ensure hook_form_alter() is invoked last.
+    $group = $implementations['entity_form_steps'];
+    unset($implementations['entity_form_steps']);
+    $implementations += ['entity_form_steps' => $group];
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function entity_form_steps_form_alter(array &$form, FormStateInterface $formState, string $formId): void {
+  if ($formState->getFormObject() instanceof ContentEntityFormInterface) {
+    EntityFormSteps::alterForm($form, $formState);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function entity_form_steps_form_entity_form_display_edit_form_alter(&$form, FormStateInterface $formState, string $formId): void {
+  $form['actions']['submit']['#validate'] = ['_entity_form_steps_form_entity_display_form_validate'];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function entity_form_steps_form_entity_view_display_edit_form_alter(&$form, FormStateInterface $formState, string $formId): void {
+  $form['actions']['submit']['#validate'] = ['_entity_form_steps_form_entity_display_form_validate'];
+}
+
+/**
+ * Validate entity display form.
+ *
+ * @see entity_form_steps_form_entity_form_display_edit_form_alter()
+ * @see entity_form_steps_form_entity_view_display_edit_form_alter()
+ */
+function _entity_form_steps_form_entity_display_form_validate($form, FormStateInterface $formState): void {
+  $fields = $formState->getValue('fields');
+  foreach ($fields as &$data) {
+    // Unset parent wrapper values for steps field groups.
+    if (isset($data['format']['type']) && $data['format']['type'] === 'steps') {
+      $data['parent'] = '';
+      $data['parent_wrapper'] = [];
+    }
+  }
+  $formState->setValue('fields', $fields);
+}

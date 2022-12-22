@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function entity_form_steps_install(): void {
+  module_set_weight('entity_form_steps', 1);
+}
+
+/**
+ * Set module weight higher than field_group module.
+ */
+function entity_form_steps_update_9001(&$sandbox): void {
+  module_set_weight('entity_form_steps', 1);
+}

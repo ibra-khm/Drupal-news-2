@@ -1,0 +1,34 @@
+field_group.field_group_formatter_plugin.steps:
+  type: field_group.field_group_formatter_plugin.base
+  label: 'Mapping for the form steps formatter settings.'
+  mapping:
+    add_label:
+      type: label
+      label: 'Add label'
+    edit_label:
+      type: label
+      label: 'Edit label'
+    cancel_button:
+      type: label
+      label: 'Cancel button'
+    cancel_path:
+      type: path
+      label: 'Cancel button URL'
+    previous_button:
+      type: label
+      label: 'Previous button'
+    next_button:
+      type: label
+      label: 'Next button'
+    submit_button:
+      type: label
+      label: 'Submit button'
+    preview_button:
+      type: label
+      label: 'Preview button'
+    delete_button:
+      type: label
+      label: 'Delete button'
+    delete_path:
+      type: path
+      label: 'Delete button URL'
